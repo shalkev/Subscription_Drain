@@ -214,7 +214,7 @@ export function SubscriptionSelection() {
                                 layout
                             >
                                 <span className="sub-icon">✨</span>
-                                <span className="sub-name">{sub.name}</span>
+                                <span className="sub-name" style={{ color: 'white', fontWeight: 600 }}>{sub.name}</span>
                                 <span className="sub-price">{sub.monthlyPrice.toFixed(2)}€</span>
                                 <button
                                     onClick={() => removeSubscription(sub.id)}
@@ -269,7 +269,7 @@ export function SubscriptionSelection() {
                                             >
                                                 <span className="sub-icon" style={{ fontSize: '1.75rem' }}>{sub.icon}</span>
                                             </div>
-                                            <span className="sub-name">{sub.name}</span>
+                                            <span className="sub-name" style={{ color: 'white', fontWeight: 600 }}>{sub.name}</span>
                                             <span className="sub-price">{sub.defaultPrice.toFixed(2)}€</span>
 
                                             {/* External link to official site */}
