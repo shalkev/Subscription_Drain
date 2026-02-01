@@ -69,9 +69,9 @@ export function SubscriptionSelection() {
     return (
         <div className="step-selection">
             <div className="step-header" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
-                <h2 className="step-title">Deine Abos</h2>
+                <h2 className="step-title">Gängigste Abos</h2>
                 <p className="step-description">
-                    Wähle aus <strong>{availableSubscriptions.length} beliebten Abos</strong> oder füge eigene hinzu.
+                    Wähle aus den <strong>{availableSubscriptions.length} beliebtesten Abos</strong> deine aus oder füge deine eigenen hinzu.
                 </p>
 
                 {/* Update Prices Button - nur auf Step 1 */}
