@@ -1,7 +1,4 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-
-export function middleware(request: NextRequest) {
+export default function middleware(request: Request) {
     const authHeader = request.headers.get('authorization')
 
     // Benutzername: myname
@@ -9,7 +6,7 @@ export function middleware(request: NextRequest) {
     const expectedAuth = 'Basic ' + btoa('myname:myproject2026')
 
     if (authHeader !== expectedAuth) {
-        return new NextResponse('Nicht autorisiert', {
+        return new Response('Nicht autorisiert', {
             status: 401,
             headers: {
                 'WWW-Authenticate': 'Basic realm="Privates Hobbyprojekt"',
@@ -17,7 +14,11 @@ export function middleware(request: NextRequest) {
         })
     }
 
-    return NextResponse.next()
+    return new Response(null, {
+        headers: {
+            'x-middleware-next': '1',
+        },
+    })
 }
 
 // Diese Zeile sorgt dafür, dass die Sperre für ALLE Seiten gilt
