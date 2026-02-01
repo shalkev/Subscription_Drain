@@ -394,11 +394,12 @@ export function ResultDashboard() {
                     <motion.div
                         whileHover={{ scale: 1.05 }}
                         style={{
-                            fontSize: '2.5rem',
+                            fontSize: 'clamp(2rem, 8vw, 3rem)',
                             fontWeight: '800',
                             color: '#10b981',
                             textShadow: '0 0 25px rgba(16, 185, 129, 0.3)',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            lineHeight: 1.2
                         }}
                     >
                         {formatCurrency(result.investmentProjections[result.investmentProjections.length - 1].amount)}
@@ -461,11 +462,29 @@ export function ResultDashboard() {
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
-                    <p style={{ marginTop: '1rem', fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>
-                        {formatCurrency(result.investmentProjections[result.investmentProjections.length - 1].amount)}
-                    </p>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                        Das hättest du in 10 Jahren, wenn du das Geld investiert hättest!
+                    <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
+                        <p style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: '#10b981', textShadow: '0 0 20px rgba(16, 185, 129, 0.2)' }}>
+                            {formatCurrency(result.investmentProjections[1].amount)}
+                        </p>
+                        <div style={{
+                            display: 'flex',
+                            gap: '12px',
+                            fontSize: '0.8rem',
+                            padding: '6px 16px',
+                            borderRadius: '50px',
+                            background: 'rgba(255,255,255,0.05)',
+                            border: '1px solid rgba(255,255,255,0.1)'
+                        }}>
+                            <span style={{ color: 'var(--text-secondary)' }}>
+                                {formatCurrency(result.wastedMonthly * 12 * 10)} Sparguthaben
+                            </span>
+                            <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>
+                                + {formatCurrency(result.investmentProjections[1].amount - (result.wastedMonthly * 12 * 10))} Zinsgewinn*
+                            </span>
+                        </div>
+                    </div>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1rem', fontStyle: 'italic' }}>
+                        *Berechnet mit einer durchschnittlichen jährlichen Rendite von 7% über 10 Jahre.
                     </p>
                 </div>
             </div>
@@ -828,23 +847,48 @@ export function ResultDashboard() {
                             {messages.map((msg, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
                                     style={{
-                                        alignSelf: 'flex-start',
-                                        width: 'fit-content',
+                                        display: 'flex',
+                                        gap: '0.8rem',
+                                        alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
                                         maxWidth: '90%',
-                                        padding: '1rem 1.5rem',
-                                        borderRadius: '16px',
-                                        background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.05)',
-                                        border: `1px solid ${msg.role === 'user' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255,255,255,0.1)'}`,
-                                        color: '#fff',
-                                        fontSize: '0.95rem',
-                                        lineHeight: '1.5',
-                                        textAlign: 'left'
+                                        flexDirection: msg.role === 'user' ? 'row-reverse' : 'row'
                                     }}
                                 >
-                                    {msg.text}
+                                    {/* Avatar */}
+                                    <div style={{
+                                        width: '32px',
+                                        height: '32px',
+                                        borderRadius: '50%',
+                                        background: msg.role === 'bot' ? 'url("/ai-robot.png") center/cover' : 'rgba(59, 130, 246, 0.4)',
+                                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                                        flexShrink: 0,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '0.8rem',
+                                        boxShadow: msg.role === 'bot' ? '0 0 10px rgba(59, 130, 246, 0.5)' : 'none'
+                                    }}>
+                                        {msg.role === 'user' && 'DU'}
+                                    </div>
+
+                                    <div
+                                        style={{
+                                            padding: '0.85rem 1.25rem',
+                                            borderRadius: '16px',
+                                            background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.25)' : 'rgba(255,255,255,0.05)',
+                                            border: `1px solid ${msg.role === 'user' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255,255,255,0.1)'}`,
+                                            color: '#fff',
+                                            fontSize: '0.9rem',
+                                            lineHeight: '1.4',
+                                            textAlign: 'left',
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                                        }}
+                                    >
+                                        {msg.text}
+                                    </div>
                                 </motion.div>
                             ))}
                             {isThinking && (
