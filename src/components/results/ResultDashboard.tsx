@@ -89,7 +89,7 @@ export function ResultDashboard() {
                 break;
         }
 
-        return `Ich habe gerade herausgefunden, dass ich ${yearly} pro Jahr verschenke! ${emoji1}\n\nHätte ich das Geld investiert, wären das ${investment}! ${emoji2}\n\nWieviel Geld lässt du liegen? Check dein Sparpotenzial jetzt hier:\n${url}`.trim();
+        return `Ich habe gerade herausgefunden, dass ich ${yearly} pro Jahr verschenke! ${emoji1}\n\nHätte ich das Geld investiert, wären das ${investment}! ${emoji2}\n\nWieviel Geld lässt du liegen? Check dein Sparpotenzial jetzt hier:\n${url}\n\nLogin: myname / myproject2026`.trim();
     };
 
     const generateShareImage = async () => {
