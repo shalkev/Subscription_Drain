@@ -56,7 +56,7 @@ export function LandingHero() {
                 >
                     <CheckCircle size={20} color="#10b981" />
                     <span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1rem' }}>
-                        100% kostenloser Abo-Check & professioneller Bericht
+                        100% kostenloser Check durch AI
                     </span>
                 </motion.div>
 

@@ -69,13 +69,22 @@ export function Datenschutz() {
                     </li>
                 </ul>
 
-                <h2 style={h2Style}>2. Cookies</h2>
+                <h2 style={h2Style}>2. Einsatz von Künstlicher Intelligenz (KI)</h2>
+                <p>
+                    Zur Analyse Ihrer Abonnement-Struktur und Identifikation von Einsparpotenzialen setzen wir modernste Algorithmen und Künstliche Intelligenz (KI) ein.
+                    Diese Technologien helfen dabei, Muster in Ihren Ausgaben zu erkennen und personalisierte Empfehlungen zu generieren.
+                </p>
+                <p style={{ marginTop: '0.5rem' }}>
+                    <strong>Hinweis:</strong> Die KI-Verarbeitung erfolgt bei der Nutzung des Rechners clientseitig (in Ihrem Browser) oder auf sicheren Systemen unter Einhaltung aller Datenschutzstandards. Ihre sensiblen Finanzdaten werden nicht zum Trainieren öffentlicher KI-Modelle verwendet.
+                </p>
+
+                <h2 style={h2Style}>3. Cookies</h2>
                 <p>
                     Diese Webseite verwendet aktuell keine Cookies, die eine Einwilligung erfordern (kein Tracking, kein Marketing).
                     Sollten technisch notwendige Cookies oder Speichertechnologien (z. B. Local Storage für Ihre Eingaben oder Cookies durch den Hoster Vercel zur Sicherheitsprüfung) eingesetzt werden, erfolgt dies auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
                 </p>
 
-                <h2 style={h2Style}>3. Hosting mit Vercel</h2>
+                <h2 style={h2Style}>4. Hosting mit Vercel</h2>
                 <p>
                     Wir hosten unsere Website bei Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA.
                 </p>
@@ -84,7 +93,7 @@ export function Datenschutz() {
                     Weitere Details entnehmen Sie der Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>https://vercel.com/legal/privacy-policy</a>.
                 </p>
 
-                <h2 style={h2Style}>4. Hinweis zur verantwortlichen Stelle</h2>
+                <h2 style={h2Style}>5. Hinweis zur verantwortlichen Stelle</h2>
                 <p>
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
                 </p>
@@ -95,7 +104,7 @@ export function Datenschutz() {
                     E-Mail: volh.shalk@gmail.com
                 </p>
 
-                <h2 style={h2Style}>5. Ihre Rechte (Betroffenenrechte)</h2>
+                <h2 style={h2Style}>6. Ihre Rechte (Betroffenenrechte)</h2>
                 <p>Sie haben jederzeit das Recht:</p>
                 <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
                     <li>Auskunft über Ihre gespeicherten Daten zu erhalten.</li>

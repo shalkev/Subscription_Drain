@@ -66,9 +66,12 @@ export function Impressum() {
                 <p>
                     Die auf dieser Webseite angebotenen Tools (Abo-Analyse, Investment-Rechner) dienen ausschließlich Informations- und Unterhaltungszwecken. Die Ergebnisse stellen keine Anlageberatung und keine Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar.
                 </p>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: 'white', marginTop: '1rem', marginBottom: '0.5rem' }}>Risikohinweis</h3>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: 'white', marginTop: '1rem', marginBottom: '0.5rem' }}>Risikohinweis & KI-Nutzung</h3>
                 <p>
-                    Die Berechnungen basieren auf Annahmen oder historischen Werten. Wertentwicklungen der Vergangenheit sind kein Indikator für die Zukunft. Jedes Investment ist mit Risiken bis hin zum Totalverlust verbunden. Der Betreiber haftet nicht für Entscheidungen, die Nutzer basierend auf den Rechnern treffen.
+                    Die Berechnungen basieren auf Annahmen oder historischen Werten. Wertentwicklungen der Vergangenheit sind kein Indikator für die Zukunft. Jedes Investment ist mit Risiken bis hin zum Totalverlust verbunden.
+                </p>
+                <p style={{ marginTop: '0.5rem' }}>
+                    <strong>KI-Hinweis:</strong> Die App nutzt modernste Algorithmen und Künstliche Intelligenz (AI), um Sparpotenziale zu ermitteln. Die Ergebnisse sind theoretische Hochrechnungen. Der Betreiber haftet nicht für Entscheidungen, die auf Basis dieser automatisierten Analysen getroffen werden.
                 </p>
             </div>
 
