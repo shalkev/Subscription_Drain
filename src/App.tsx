@@ -70,18 +70,18 @@ function FloatingBackground() {
           style={{
             position: 'absolute',
             left: `${p.left}%`,
-            fontSize: `${p.size}rem`,
+            fontSize: `${p.isBurning ? p.size * 2 : p.size}rem`,
             opacity: p.isBurning ? 1 : 0.4,
             color: p.isBurning ? '#ef4444' : '#FFD700',
             textShadow: p.isBurning ? '0 0 30px #ef4444, 0 0 10px #ef4444' : '0 0 20px rgba(255, 215, 0, 0.8)',
-            animation: p.isBurning ? 'none' : `floatUp ${p.duration}s linear infinite`,
+            animation: `floatUp ${p.duration}s linear infinite`,
+            animationPlayState: p.isBurning ? 'paused' : 'running',
             animationDelay: `-${p.delay}s`,
             bottom: '-20%',
             filter: p.isBurning ? 'blur(0px)' : 'none',
             pointerEvents: 'auto',
             cursor: 'crosshair',
-            transform: p.isBurning ? 'scale(1.5)' : 'scale(1)',
-            transition: 'all 0.3s ease-out',
+            transition: 'all 0.2s ease-out',
             zIndex: p.isBurning ? 10 : 0
           }}
         >
