@@ -4,9 +4,9 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
     const authHeader = request.headers.get('authorization')
 
-    // Benutzername: meinname
-    // Passwort: meinprojekt2024
-    const expectedAuth = 'Basic ' + btoa('meinname:meinprojekt2024')
+    // Benutzername: myname
+    // Passwort: myproject2026
+    const expectedAuth = 'Basic ' + btoa('myname:myproject2026')
 
     if (authHeader !== expectedAuth) {
         return new NextResponse('Nicht autorisiert', {
