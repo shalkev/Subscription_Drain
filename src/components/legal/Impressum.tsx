@@ -38,25 +38,22 @@ export function Impressum() {
             <div style={sectionStyle}>
                 <h2 style={h2Style}>Angaben gemäß § 5 DDG</h2>
                 <p>
-                    Volha Shalkevich<br />
-                    Gehrenbachweg 30<br />
-                    72275 Alpirsbach
+                    Privatprojekt<br />
+                    Keine öffentliche Zugänglichkeit ohne Autorisierung.
                 </p>
             </div>
 
             <div style={sectionStyle}>
                 <h2 style={h2Style}>Kontakt</h2>
                 <p>
-                    E-Mail: volh.shalk@gmail.com
+                    Kontakt über Projekt-Administrator.
                 </p>
             </div>
 
             <div style={sectionStyle}>
                 <h2 style={h2Style}>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
                 <p>
-                    Volha Shalkevich<br />
-                    Gehrenbachweg 30<br />
-                    72275 Alpirsbach
+                    Privatprojekt - Administrator
                 </p>
             </div>
 

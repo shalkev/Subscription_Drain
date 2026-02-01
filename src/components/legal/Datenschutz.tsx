@@ -98,10 +98,8 @@ export function Datenschutz() {
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
                 </p>
                 <p style={{ marginTop: '0.5rem' }}>
-                    Volha Shalkevich<br />
-                    Gehrenbachweg 30<br />
-                    72275 Alpirsbach<br />
-                    E-Mail: volh.shalk@gmail.com
+                    Privatprojekt - Administrator<br />
+                    Kontakt über interne Kanäle.
                 </p>
 
                 <h2 style={h2Style}>6. Ihre Rechte (Betroffenenrechte)</h2>
