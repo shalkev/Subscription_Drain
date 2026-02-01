@@ -56,6 +56,41 @@ body {
     padding: 0 10px;
   }
 
+  .chatbot-container {
+    padding: 1.25rem 0.75rem !important;
+  }
+
+  .chatbot-header {
+    margin-top: 1.5rem !important;
+    /* Make room for the floating avatar */
+  }
+
+  /* AI Assistant Badge Mobile Adjustments */
+  .ai-assistant-badge {
+    width: 60px !important;
+    height: 60px !important;
+    top: 5px !important;
+    right: 5px !important;
+    border-radius: 12px !important;
+    padding: 4px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .chat-input-form {
+    gap: 0.5rem !important;
+  }
+
+  .chat-input-form input {
+    font-size: 16px !important;
+    /* Prevents auto-zoom on iOS */
+    padding: 0.6rem 1rem !important;
+  }
+
+  .chat-input-form button:active {
+    transform: scale(0.9) !important;
+    background: #2563eb !important;
+  }
+
   /* Make robot background less intrusive on mobile */
   [data-robot-bg="true"] {
     opacity: 0.2 !important;

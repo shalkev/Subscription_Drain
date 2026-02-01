@@ -740,6 +740,7 @@ export function ResultDashboard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
+                    className="chatbot-container"
                     style={{
                         padding: '2rem',
                         background: 'rgba(5, 8, 15, 0.85)',
@@ -756,8 +757,9 @@ export function ResultDashboard() {
                         alignItems: 'center'
                     }}
                 >
-                    {/* AI Assistant Badge - Top Right */}
+                    {/* AI Assistant Badge - Responsive */}
                     <motion.div
+                        className="ai-assistant-badge"
                         animate={{
                             y: [0, -5, 0],
                             boxShadow: isThinking
@@ -828,7 +830,7 @@ export function ResultDashboard() {
                         flexDirection: 'column',
                         gap: '1.5rem'
                     }}>
-                        <div style={{
+                        <div className="chatbot-header" style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -925,11 +927,15 @@ export function ResultDashboard() {
                             )}
                         </div>
 
-                        <form onSubmit={handleChatSubmit} style={{
-                            display: 'flex',
-                            gap: '0.8rem',
-                            position: 'relative'
-                        }}>
+                        <form
+                            onSubmit={handleChatSubmit}
+                            className="chat-input-form"
+                            style={{
+                                display: 'flex',
+                                gap: '0.8rem',
+                                position: 'relative'
+                            }}
+                        >
                             <input
                                 type="text"
                                 value={chatInput}
