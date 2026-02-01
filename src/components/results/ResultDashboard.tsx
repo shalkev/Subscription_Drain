@@ -771,19 +771,20 @@ export function ResultDashboard() {
                         }}
                         style={{
                             position: 'absolute',
-                            top: '20px',
-                            right: '20px',
-                            width: '80px',
-                            height: '80px',
-                            background: 'rgba(59, 130, 246, 0.1)',
-                            borderRadius: '20px',
-                            border: '1px solid rgba(59, 130, 246, 0.3)',
-                            padding: '10px',
+                            top: '30px',
+                            right: '30px',
+                            width: '120px',
+                            height: '120px',
+                            background: 'rgba(59, 130, 246, 0.15)',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(59, 130, 246, 0.4)',
+                            padding: '12px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             zIndex: 10,
-                            backdropFilter: 'blur(10px)'
+                            backdropFilter: 'blur(12px)',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
                         }}
                     >
                         <img
