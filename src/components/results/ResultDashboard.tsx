@@ -4,15 +4,61 @@ import { formatCurrency } from '../../logic/calculator';
 import { CATEGORIES } from '../../data/subscriptions';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import html2canvas from 'html2canvas';
-import { Share2, RotateCcw, XCircle, TrendingUp, ExternalLink, Instagram, Facebook, MessageCircle, Twitter, Camera } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Share2, RotateCcw, TrendingUp, Instagram, Facebook, MessageCircle, Twitter, Camera, Sparkles, Bot, Send, MessageSquare } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
 import { FireIcon } from '../icons/FireIcon';
+import { getSimulationResponse } from '../../logic/aiService';
 
 export function ResultDashboard() {
     const { result, reset, investmentRate } = useCalculator();
     const [displayAmount, setDisplayAmount] = useState(0);
     const [hoveredAction, setHoveredAction] = useState<'cancel' | 'invest' | null>(null);
     const controls = useAnimation();
+    const chatEndRef = useRef<HTMLDivElement>(null);
+
+    // Chatbot State
+    const [chatInput, setChatInput] = useState('');
+    const [isThinking, setIsThinking] = useState(false);
+    const [thinkingMsg, setThinkingMsg] = useState('KI Guide analysiert...');
+    const [messages, setMessages] = useState<{ role: 'user' | 'bot'; text: string }[]>([
+        { role: 'bot', text: 'Hallo! Ich bin dein KI Finanz-Guide. Gemeinsam analysieren wir dein Einsparpotenzial und wie du es am besten investieren kannst. Frag mich gerne alles zu deinen Ergebnissen!' }
+    ]);
+
+    // Auto-scroll chat to bottom
+    useEffect(() => {
+        if (chatEndRef.current) {
+            chatEndRef.current.scrollTo({
+                top: chatEndRef.current.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    }, [messages, isThinking]);
+
+    const handleChatSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!chatInput.trim() || isThinking || !result) return;
+
+        const userMsg = chatInput;
+        setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+        setChatInput('');
+        const thinkingOptions = [
+            'KI analysiert deine Abos...',
+            'Berechne Zinseszinseffekt...',
+            'Prüfe Investment-Potenzial...',
+            'Suche nach Einsparmöglichkeiten...'
+        ];
+        setThinkingMsg(thinkingOptions[Math.floor(Math.random() * thinkingOptions.length)]);
+        setIsThinking(true);
+
+        try {
+            const botResponse = await getSimulationResponse(userMsg, result);
+            setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
+        } catch (error) {
+            setMessages(prev => [...prev, { role: 'bot', text: "Entschuldigung, ich hatte gerade einen kleinen Aussetzer. Frag mich bitte nochmal!" }]);
+        } finally {
+            setIsThinking(false);
+        }
+    };
 
     const getShareText = (platform: 'whatsapp' | 'instagram' | 'facebook' | 'twitter' | 'default' = 'default') => {
         if (!result) return '';
@@ -315,9 +361,36 @@ export function ResultDashboard() {
                         zIndex: 1
                     }}
                 >
-                    <p style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 'bold', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                        Dein Reichtum-Potenzial
-                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                        <motion.span
+                            animate={{
+                                scale: [1, 1.4, 1],
+                                rotate: [0, 10, -10, 0],
+                                filter: [
+                                    'drop-shadow(0 0 8px rgba(251, 191, 36, 0.4))',
+                                    'drop-shadow(0 0 20px rgba(251, 191, 36, 0.8))',
+                                    'drop-shadow(0 0 8px rgba(251, 191, 36, 0.4))'
+                                ]
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            style={{
+                                color: '#fbbf24',
+                                fontSize: '1.8rem', // Larger size
+                                fontWeight: '900',
+                                display: 'inline-block',
+                                marginRight: '0.2rem'
+                            }}
+                        >
+                            €
+                        </motion.span>
+                        <p style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 'bold', letterSpacing: '1.5px', textTransform: 'uppercase', margin: 0 }}>
+                            Dein Reichtum-Potenzial
+                        </p>
+                    </div>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
                         style={{
@@ -397,26 +470,83 @@ export function ResultDashboard() {
                 </div>
             </div>
 
-            {/* Action Buttons: Abo kündigen & Investieren */}
+            {/* Action Section: AI Recommendations */}
             <div className="action-section" style={{
                 margin: '3rem 0 2rem',
-                padding: '2rem',
-                background: 'rgba(59, 130, 246, 0.05)',
-                borderRadius: '16px',
-                border: '1px solid rgba(59, 130, 246, 0.2)'
+                padding: '2.5rem',
+                background: 'rgba(59, 130, 246, 0.03)',
+                borderRadius: '24px',
+                border: '1px solid rgba(59, 130, 246, 0.1)',
+                backdropFilter: 'blur(20px)',
+                position: 'relative',
+                overflow: 'hidden'
             }}>
-                <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Jetzt handeln!</h3>
-                {/* 
-                   KONFIGURATION: AFFILIATE LINKS
-                   Hier können Sie Ihre eigenen Partner-Links hinterlegen.
-                   Ändern Sie einfach die URL in den Anführungszeichen.
-                */}
+                <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '1rem',
+                        marginBottom: '2.5rem',
+                        cursor: 'default',
+                        position: 'relative'
+                    }}
+                >
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 15, -15, 0],
+                            filter: [
+                                'drop-shadow(0 0 5px rgba(59, 130, 246, 0.3))',
+                                'drop-shadow(0 0 15px rgba(59, 130, 246, 0.6))',
+                                'drop-shadow(0 0 5px rgba(59, 130, 246, 0.3))'
+                            ]
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    >
+                        <Sparkles size={32} color="#3b82f6" />
+                    </motion.div>
+
+                    <h3 style={{
+                        margin: 0,
+                        fontSize: '1.8rem',
+                        fontWeight: '900',
+                        background: 'linear-gradient(to right, #fff, #3b82f6, #fff)',
+                        backgroundSize: '200% auto',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        animation: 'shine 4s linear infinite',
+                        letterSpacing: '-0.5px'
+                    }}>
+                        Deine KI-Empfehlungen
+                    </h3>
+
+                    {/* Subtle Glow behind the title */}
+                    <div style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '120%',
+                        height: '100%',
+                        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
+                        zIndex: -1,
+                        pointerEvents: 'none'
+                    }} />
+                </motion.div>
+
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                    gap: '1rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '1.5rem',
+                    marginBottom: '2rem'
                 }}>
-                    {/* Kündigen Button Container */}
+                    {/* Kündigungs-Beratung */}
                     <div
                         style={{ position: 'relative' }}
                         onMouseEnter={() => setHoveredAction('cancel')}
@@ -437,7 +567,7 @@ export function ResultDashboard() {
                                         marginBottom: '12px',
                                         width: 'max-content',
                                         maxWidth: '280px',
-                                        background: 'rgba(220, 38, 38, 0.95)', // Red tint for urgency
+                                        background: 'rgba(220, 38, 38, 0.95)',
                                         backdropFilter: 'blur(10px)',
                                         border: '1px solid rgba(255,255,255,0.2)',
                                         borderRadius: '12px',
@@ -461,34 +591,47 @@ export function ResultDashboard() {
                                         borderRight: '1px solid rgba(255,255,255,0.2)'
                                     }} />
                                     <p style={{ fontWeight: '700', fontSize: '0.95rem', color: '#fff', marginBottom: '4px' }}>
-                                        Schluss mit Papierkram! 📄🚫
+                                        Kosten-Stopp aktivieren! 📄🚫
                                     </p>
                                     <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.4' }}>
-                                        Kündige rechtssicher in <span style={{ textDecoration: 'underline decoration-yellow-400' }}>unter 2 Minuten</span>.
+                                        Nutze rechtssichere Wege für deine Kündigung.
                                     </p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        <a
-                            href="https://www.volders.de/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <motion.div
                             className="action-button cancel"
-                            style={{ textDecoration: 'none', width: '100%', height: '100%' }}
+                            whileHover={{ scale: 1.02, backgroundColor: 'rgba(239, 68, 68, 0.08)' }}
+                            whileTap={{ scale: 0.98 }}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1rem',
+                                padding: '1.5rem',
+                                background: 'rgba(239, 68, 68, 0.05)',
+                                borderColor: 'rgba(239, 68, 68, 0.2)',
+                                borderRadius: '16px',
+                                border: '1px solid',
+                                transition: 'border-color 0.2s ease'
+                            }}
                         >
-                            <XCircle size={24} />
-                            <div>
-                                <strong>Abos kündigen</strong>
-                                <p style={{ fontSize: '0.8rem', opacity: 0.8, margin: '0.25rem 0 0' }}>
-                                    Verwalte & kündige deine Verträge
-                                </p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                                <Bot size={24} color="#ef4444" />
+                                <strong style={{ fontSize: '1.1rem', color: '#ef4444' }}>Kündigungs-Check</strong>
                             </div>
-                            <ExternalLink size={16} />
-                        </a>
+                            <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.9, color: 'var(--text-primary)' }}>
+                                Stoppe den jährlichen Verlust von <strong>{formatCurrency(result.wastedYearly)}</strong>.
+                                Prüfe deine Bankauszüge auf "Zombie-Abos" und nutze rechtssichere Portale deiner Wahl.
+                                Handle jetzt!
+                            </p>
+                        </motion.div>
                     </div>
 
-                    {/* Investieren Button Container */}
+                    {/* Investieren Beratung */}
                     <div
                         style={{ position: 'relative' }}
                         onMouseEnter={() => setHoveredAction('invest')}
@@ -509,7 +652,7 @@ export function ResultDashboard() {
                                         marginBottom: '12px',
                                         width: 'max-content',
                                         maxWidth: '280px',
-                                        background: 'rgba(16, 185, 129, 0.95)', // Green tint for money/growth
+                                        background: 'rgba(16, 185, 129, 0.95)',
                                         backdropFilter: 'blur(10px)',
                                         border: '1px solid rgba(255,255,255,0.2)',
                                         borderRadius: '12px',
@@ -533,32 +676,247 @@ export function ResultDashboard() {
                                         borderRight: '1px solid rgba(255,255,255,0.2)'
                                     }} />
                                     <p style={{ fontWeight: '700', fontSize: '0.95rem', color: '#fff', marginBottom: '4px' }}>
-                                        Lass Geld für dich arbeiten! 📈
+                                        Kapital intelligent nutzen! 📈
                                     </p>
                                     <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.9)', lineHeight: '1.4' }}>
-                                        Sichere dir <span style={{ fontWeight: 'bold', color: '#fbbf24' }}>4% Zinsen</span> statt 0% auf dem Girokonto.
+                                        Vergleiche Broker für attraktive Renditechancen.
                                     </p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        <a
-                            href="https://traderepublic.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <motion.div
                             className="action-button invest"
-                            style={{ textDecoration: 'none', width: '100%', height: '100%' }}
+                            whileHover={{ scale: 1.02, backgroundColor: 'rgba(16, 185, 129, 0.08)' }}
+                            whileTap={{ scale: 0.98 }}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1rem',
+                                padding: '1.5rem',
+                                background: 'rgba(16, 185, 129, 0.05)',
+                                borderColor: 'rgba(16, 185, 129, 0.2)',
+                                borderRadius: '16px',
+                                border: '1px solid',
+                                transition: 'border-color 0.2s ease'
+                            }}
                         >
-                            <TrendingUp size={24} />
-                            <div>
-                                <strong>Jetzt investieren</strong>
-                                <p style={{ fontSize: '0.8rem', opacity: 0.8, margin: '0.25rem 0 0' }}>
-                                    Starte in deine finanzielle Zukunft
-                                </p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                                <TrendingUp size={24} color="#10b981" />
+                                <strong style={{ fontSize: '1.1rem', color: '#10b981' }}>Investment-Check</strong>
                             </div>
-                            <ExternalLink size={16} />
-                        </a>
+                            <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.9, color: 'var(--text-primary)' }}>
+                                Investiere deine Ersparnis von <strong>{formatCurrency(result.wastedMonthly)} p.M.</strong> in einen ETF-Sparplan.
+                                Nutze den Zinseszinseffekt durch eigene Recherche und Broker-Vergleiche.
+                            </p>
+                        </motion.div>
                     </div>
+                </div>
+
+                {/* AI Chatbot Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    style={{
+                        background: 'rgba(10, 15, 28, 0.95)',
+                        border: '1px solid rgba(59, 130, 246, 0.2)',
+                        borderRadius: '24px',
+                        padding: '2.5rem 2rem',
+                        marginTop: '2rem',
+                        position: 'relative',
+                        textAlign: 'left', // Align all text left
+                        overflow: 'hidden',
+                        boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+                        minHeight: '600px', // Extra height for robot centering
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                    }}
+                >
+                    {/* Animated Robot Background - Centered on Right */}
+                    <motion.div
+                        animate={{
+                            y: [0, -10, 0],
+                            scale: isThinking ? [1, 1.02, 1] : [1, 1.01, 1],
+                            opacity: isThinking ? [0.3, 0.5, 0.3] : 0.25,
+                        }}
+                        transition={{
+                            duration: isThinking ? 1.5 : 5,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            bottom: 0,
+                            right: 0,
+                            width: '50%',
+                            background: 'url("/ai-bg.png") no-repeat right center', // Centered vertically at right
+                            backgroundSize: '85%',
+                            pointerEvents: 'none',
+                            zIndex: 0,
+                            filter: 'drop-shadow(0 0 50px rgba(59, 130, 246, 0.2))',
+                            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                            maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' // Smooth fade at top and bottom
+                        }}
+                    />
+                    {/* Decorative Blur for Focus */}
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'radial-gradient(circle at center, transparent 30%, rgba(10, 15, 28, 0.4) 100%)',
+                        pointerEvents: 'none'
+                    }} />
+
+                    {/* Chat Content Wrapper - Narrower to avoid overlap */}
+                    <div style={{
+                        maxWidth: '55%',
+                        position: 'relative',
+                        zIndex: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1.5rem'
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            gap: '0.5rem'
+                        }}>
+                            <motion.div
+                                animate={{
+                                    boxShadow: [
+                                        '0 0 0px rgba(59, 130, 246, 0)',
+                                        '0 0 20px rgba(59, 130, 246, 0.4)',
+                                        '0 0 0px rgba(59, 130, 246, 0)'
+                                    ]
+                                }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                style={{
+                                    padding: '10px',
+                                    background: 'rgba(59, 130, 246, 0.1)',
+                                    borderRadius: '12px',
+                                    color: '#3b82f6'
+                                }}>
+                                <MessageSquare size={24} />
+                            </motion.div>
+                            <h4 style={{ margin: 0, fontSize: '1.2rem', color: '#fff', fontWeight: '800' }}>KI Finanz-Guide</h4>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <div style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%', boxShadow: '0 0 10px #10b981' }} />
+                                <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>
+                                    Live Analysis & Guidance
+                                </span>
+                            </div>
+                        </div>
+
+                        <div
+                            ref={chatEndRef}
+                            style={{
+                                height: '280px',
+                                overflowY: 'auto',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1.2rem',
+                                paddingRight: '1rem'
+                            }} className="custom-scrollbar">
+                            {messages.map((msg, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    style={{
+                                        alignSelf: 'flex-start',
+                                        width: 'fit-content',
+                                        maxWidth: '90%',
+                                        padding: '1rem 1.5rem',
+                                        borderRadius: '16px',
+                                        background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.2)' : 'rgba(255,255,255,0.05)',
+                                        border: `1px solid ${msg.role === 'user' ? 'rgba(59, 130, 246, 0.3)' : 'rgba(255,255,255,0.1)'}`,
+                                        color: '#fff',
+                                        fontSize: '0.95rem',
+                                        lineHeight: '1.5',
+                                        textAlign: 'left'
+                                    }}
+                                >
+                                    {msg.text}
+                                </motion.div>
+                            ))}
+                            {isThinking && (
+                                <div style={{ alignSelf: 'flex-start', color: 'rgba(59, 130, 246, 0.6)', fontSize: '0.85rem', fontStyle: 'italic', paddingLeft: '1rem' }}>
+                                    {thinkingMsg}
+                                </div>
+                            )}
+                        </div>
+
+                        <form onSubmit={handleChatSubmit} style={{
+                            display: 'flex',
+                            gap: '0.8rem',
+                            position: 'relative'
+                        }}>
+                            <input
+                                type="text"
+                                value={chatInput}
+                                onChange={(e) => setChatInput(e.target.value)}
+                                placeholder="Frag mich etwas..."
+                                disabled={isThinking}
+                                autoComplete="off"
+                                style={{
+                                    flex: 1,
+                                    background: 'rgba(255,255,255,0.05)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    borderRadius: '12px',
+                                    padding: '0.8rem 1.2rem',
+                                    color: '#fff',
+                                    fontSize: '0.95rem',
+                                    outline: 'none'
+                                }}
+                            />
+                            <button
+                                type="submit"
+                                disabled={!chatInput.trim() || isThinking}
+                                style={{
+                                    background: '#3b82f6',
+                                    color: '#fff',
+                                    border: 'none',
+                                    borderRadius: '12px',
+                                    padding: '0.8rem',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    opacity: (!chatInput.trim() || isThinking) ? 0.5 : 1,
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                <Send size={18} />
+                            </button>
+                        </form>
+                    </div>
+                </motion.div>
+
+                {/* Legal Disclaimer */}
+                <div style={{
+                    padding: '1rem',
+                    borderRadius: '12px',
+                    background: 'rgba(0,0,0,0.1)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    fontSize: '0.75rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: '1.4',
+                    textAlign: 'center'
+                }}>
+                    <p style={{ margin: 0 }}>
+                        <strong>Rechtlicher Hinweis:</strong> Diese Analyse stellt keine Anlage-, Steuer- oder Investmentberatung dar.
+                        Es handelt sich um eine rein mathematische Simulation. Der "Kündigungs-Check" dient der Visualisierung und ersetzt keine eigene rechtliche Prüfung deiner Verträge.
+                        Bitte führe deine eigenen Recherchen (Self-Research) durch, bevor du finanzielle Entscheidungen triffst.
+                    </p>
                 </div>
             </div>
 
@@ -568,6 +926,16 @@ export function ResultDashboard() {
                     Ergebnis teilen & Speichern
                 </h4>
                 <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+
+                    {/* Screenshot Download */}
+                    <button
+                        onClick={generateShareImage}
+                        className="share-btn download"
+                        style={{ background: 'var(--text-primary)', color: 'var(--bg-primary)', border: 'none', padding: '0.75rem', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        title="Als Bild speichern (Screenshot)"
+                    >
+                        <Camera size={22} />
+                    </button>
 
                     {/* WhatsApp */}
                     <a
@@ -580,16 +948,6 @@ export function ResultDashboard() {
                     >
                         <MessageCircle size={22} />
                     </a>
-
-                    {/* Screenshot Download */}
-                    <button
-                        onClick={generateShareImage}
-                        className="share-btn download"
-                        style={{ background: 'var(--text-primary)', color: 'var(--bg-primary)', border: 'none', padding: '0.75rem', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        title="Als Bild speichern (Screenshot)"
-                    >
-                        <Camera size={22} />
-                    </button>
 
                     {/* Instagram / Copy Text */}
                     <button

@@ -79,6 +79,16 @@ main {
   margin-right: auto;
 }
 
+@keyframes shine {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 200% center;
+  }
+}
+
 .cta-button {
   background: var(--primary);
   color: white;
