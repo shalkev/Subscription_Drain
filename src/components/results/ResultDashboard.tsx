@@ -67,29 +67,29 @@ export function ResultDashboard() {
         const investment = formatCurrency(savings10Years);
         const url = window.location.href;
 
-        let emoji1 = '😲';
-        let emoji2 = '🚀';
+        let emoji1 = '\u{1F632}'; // 😲
+        let emoji2 = '\u{1F680}'; // 🚀
 
         switch (platform) {
             case 'whatsapp':
-                emoji1 = '😱';
-                emoji2 = '💸';
+                emoji1 = '\u{1F631}'; // 😱
+                emoji2 = '\u{1F4B8}'; // 💸
                 break;
             case 'instagram':
-                emoji1 = '📸'; // Camera for visual platform
-                emoji2 = '✨'; // Sparkles for aesthetics
+                emoji1 = '\u{1F4F8}'; // 📸
+                emoji2 = '\u{2728}'; // ✨
                 break;
             case 'facebook':
-                emoji1 = '😮'; // Surprise face
-                emoji2 = '📈'; // Chart for investment context
+                emoji1 = '\u{1F62E}'; // 😮
+                emoji2 = '\u{1F4C8}'; // 📈
                 break;
             case 'twitter':
-                emoji1 = '💀'; // Skull for "dead" money / drama
-                emoji2 = '🚀'; // Rocket for crypto/tech vibes
+                emoji1 = '\u{1F480}'; // 💀
+                emoji2 = '\u{1F680}'; // 🚀
                 break;
         }
 
-        return `Ich habe gerade herausgefunden, dass ich ${yearly} pro Jahr verschenke! ${emoji1}\n\nHätte ich das Geld investiert, wären das ${investment}! ${emoji2}\n\nWieviel Geld lässt du liegen? Check dein Sparpotenzial jetzt hier: ${url}`;
+        return `Ich habe gerade herausgefunden, dass ich ${yearly} pro Jahr verschenke! ${emoji1}\n\nHätte ich das Geld investiert, wären das ${investment}! ${emoji2}\n\nWieviel Geld lässt du liegen? Check dein Sparpotenzial jetzt hier:\n${url}`.trim();
     };
 
     const generateShareImage = async () => {
