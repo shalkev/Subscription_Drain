@@ -52,7 +52,7 @@ const getRandomUnique = (category: keyof typeof TEMPLATES, ...args: any[]) => {
     if (usedResponses.size > 20) usedResponses.clear();
 
     const selected = options[index];
-    return typeof selected === 'function' ? selected(...args) : selected;
+    return typeof selected === 'function' ? (selected as any)(...args) : selected;
 };
 
 export const getSimulationResponse = async (userMsg: string, result: CalculationResult): Promise<string> => {
