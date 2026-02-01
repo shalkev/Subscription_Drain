@@ -722,47 +722,45 @@ export function ResultDashboard() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                     style={{
-                        background: 'rgba(10, 15, 28, 0.95)',
-                        border: '1px solid rgba(59, 130, 246, 0.2)',
+                        padding: '2rem',
+                        background: 'rgba(5, 8, 15, 0.85)',
                         borderRadius: '24px',
-                        padding: '2.5rem 2rem',
-                        marginTop: '2rem',
+                        border: '1px solid rgba(59, 130, 246, 0.15)',
                         position: 'relative',
-                        textAlign: 'left', // Align all text left
+                        textAlign: 'left',
                         overflow: 'hidden',
-                        boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                        minHeight: '600px', // Extra height for robot centering
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.6)',
+                        minHeight: '650px',
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}
                 >
-                    {/* Animated Robot Background - Centered on Right */}
+                    {/* Animated Robot Background - Subtle and Centered */}
                     <motion.div
-                        data-robot-bg="true"
                         animate={{
-                            y: [0, -10, 0],
-                            scale: isThinking ? [1, 1.02, 1] : [1, 1.01, 1],
-                            opacity: isThinking ? [0.3, 0.5, 0.3] : 0.25,
+                            scale: [1, 1.05, 1],
+                            opacity: isThinking ? [0.1, 0.2, 0.1] : 0.15,
                         }}
                         transition={{
-                            duration: isThinking ? 1.5 : 5,
+                            duration: 10,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
                         style={{
                             position: 'absolute',
                             top: 0,
-                            bottom: 0,
+                            left: 0,
                             right: 0,
-                            width: '50%',
-                            background: 'url("/ai-bg.png") no-repeat right center', // Centered vertically at right
-                            backgroundSize: '85%',
+                            bottom: 0,
+                            background: 'url("/ai-robot.png") no-repeat center center',
+                            backgroundSize: 'cover',
                             pointerEvents: 'none',
                             zIndex: 0,
-                            filter: 'drop-shadow(0 0 50px rgba(59, 130, 246, 0.2))',
-                            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
-                            maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)' // Smooth fade at top and bottom
+                            filter: 'blur(2px) brightness(0.7)',
+                            WebkitMaskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)',
+                            maskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)'
                         }}
                     />
                     {/* Decorative Blur for Focus */}
@@ -787,8 +785,9 @@ export function ResultDashboard() {
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'flex-start',
-                            gap: '0.5rem'
+                            alignItems: 'center',
+                            gap: '0.8rem',
+                            textAlign: 'center'
                         }}>
                             <motion.div
                                 animate={{

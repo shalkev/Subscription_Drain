@@ -42,8 +42,9 @@ body {
 
 /* AI Chatbot Responsive Layout */
 .chat-content-wrapper {
-  max-width: 55%;
-  margin-left: 42%;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
