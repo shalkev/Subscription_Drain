@@ -22,19 +22,19 @@ export function LandingHero() {
                     </motion.div>
                 </div>
                 <h1 className="hero-title">
-                    Wieviel Geld <br />
+                    Deine Abos im Check. <br />
                     <span style={{
                         background: 'linear-gradient(120deg, #ef4444, #f87171)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         fontWeight: '900'
                     }}>
-                        verbrennst du unbemerkt?
+                        Dein Vermögen im Blick.
                     </span>
                 </h1>
-                <p className="hero-subtitle" style={{ fontSize: '1.2rem', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto 2rem' }}>
-                    Die meisten schätzen ihre Kosten völlig falsch ein. 😱 <br />
-                    <strong>Deck jetzt die Wahrheit auf:</strong> Was zahlst du wirklich – und wie reich könntest du eigentlich sein?
+                <p className="hero-subtitle" style={{ fontSize: '1.2rem', lineHeight: '1.6', maxWidth: '650px', margin: '0 auto 2rem' }}>
+                    Transparenz für deine Fixkosten. <br />
+                    Simuliere dein Investment-Potenzial basierend auf deinen monatlichen Ersparnissen.
                 </p>
 
                 <motion.div
@@ -86,7 +86,7 @@ export function LandingHero() {
                     }}
                 >
                     <Calculator size={28} />
-                    Jetzt Wahrheit checken
+                    Jetzt Fixkosten analysieren
                 </motion.button>
             </motion.div>
         </div>
