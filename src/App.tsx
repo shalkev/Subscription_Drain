@@ -84,13 +84,13 @@ function FloatingBackground() {
             className={p.isBurning ? 'burning-particle' : ''}
             style={{
               display: 'inline-block',
-              transition: 'color 0.2s',
-              color: p.isBurning ? '#ef4444' : '#FFD700',
+              transition: 'none',
+              color: p.isBurning ? 'rgba(255,255,255,0)' : '#FFD700',
               opacity: p.isBurning ? 1 : 0.4,
               textShadow: p.isBurning ? 'none' : '0 0 20px rgba(255, 215, 0, 0.8)',
             }}
           >
-            €
+            {p.isBurning ? '🔥' : '€'}
           </span>
         </div>
       ))}
