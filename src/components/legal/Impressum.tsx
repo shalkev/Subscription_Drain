@@ -36,7 +36,7 @@ export function Impressum() {
             <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>Impressum</h1>
 
             <div style={sectionStyle}>
-                <h2 style={h2Style}>Angaben gemäß § 5 TMG</h2>
+                <h2 style={h2Style}>Angaben gemäß § 5 DDG</h2>
                 <p>
                     Volha Shalkevich<br />
                     Gehrenbachweg 30<br />
@@ -61,6 +61,25 @@ export function Impressum() {
             </div>
 
             <div style={sectionStyle}>
+                <h2 style={h2Style}>Wichtiger Haftungsausschluss (Finanz-Disclaimer)</h2>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: 'white', marginBottom: '0.5rem' }}>Keine Anlageberatung</h3>
+                <p>
+                    Die auf dieser Webseite angebotenen Tools (Abo-Analyse, Investment-Rechner) dienen ausschließlich Informations- und Unterhaltungszwecken. Die Ergebnisse stellen keine Anlageberatung und keine Aufforderung zum Kauf oder Verkauf von Finanzinstrumenten dar.
+                </p>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '600', color: 'white', marginTop: '1rem', marginBottom: '0.5rem' }}>Risikohinweis</h3>
+                <p>
+                    Die Berechnungen basieren auf Annahmen oder historischen Werten. Wertentwicklungen der Vergangenheit sind kein Indikator für die Zukunft. Jedes Investment ist mit Risiken bis hin zum Totalverlust verbunden. Der Betreiber haftet nicht für Entscheidungen, die Nutzer basierend auf den Rechnern treffen.
+                </p>
+            </div>
+
+            <div style={sectionStyle}>
+                <h2 style={h2Style}>Urheberrecht & Externe Links</h2>
+                <p>
+                    Die Inhalte dieser Seite sind urheberrechtlich geschützt. Die Nutzung von Logos (z. B. Streaming-Anbieter) erfolgt nur zur Identifikation der Dienste im Rahmen der Abo-Analyse. Wir machen uns die Inhalte verlinkter externer Webseiten nicht zu eigen und übernehmen keine Haftung für deren Inhalte.
+                </p>
+            </div>
+
+            <div style={sectionStyle}>
                 <h2 style={h2Style}>EU-Streitschlichtung</h2>
                 <p>
                     Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
@@ -76,11 +95,6 @@ export function Impressum() {
                 <p>
                     Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
                 </p>
-            </div>
-
-            <div style={sectionStyle}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem', color: 'white' }}>Haftung für Inhalte</h3>
-                <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
             </div>
 
             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)', textAlign: 'center' }}>

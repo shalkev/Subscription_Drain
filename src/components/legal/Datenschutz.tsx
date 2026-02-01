@@ -42,35 +42,49 @@ export function Datenschutz() {
 
             <div style={{ fontSize: '0.95rem' }}>
                 <h2 style={h2Style}>1. Datenschutz auf einen Blick</h2>
+
                 <h3 style={h3Style}>Allgemeine Hinweise</h3>
                 <p>
-                    Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+                    Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften (DSGVO) sowie dieser Datenschutzerklärung.
                 </p>
 
                 <h3 style={h3Style}>Datenerfassung auf dieser Website</h3>
                 <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <li><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</li>
-                    <li><strong>Wie erfassen wir Ihre Daten?</strong><br />Diese Anwendung arbeitet als Client-Side-Applikation. Das bedeutet, dass die von Ihnen eingegebenen Daten zu Ihren Abonnements und Kosten ausschließlich in Ihrem Browser verarbeitet und gespeichert werden (Local Storage). Es erfolgt keine Übertragung dieser sensiblen Eingabedaten an unsere Server oder Dritte.<br />Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme (bzw. den Hosting-Provider Vercel) erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</li>
-                    <li><strong>Wofür nutzen wir Ihre Daten?</strong><br />Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Die Eingabedaten dienen ausschließlich der Durchführung der von Ihnen gewünschten Berechnungen.</li>
+                    <li>
+                        <strong>Berechnungsdaten (Lokal):</strong><br />
+                        Die Daten, die Sie in den Abo-Rechner oder Investment-Rechner eingeben, werden ausschließlich lokal in Ihrem Browser verarbeitet (Local Storage). Es findet keine Speicherung dieser sensiblen Eingaben auf unseren Servern statt.
+                    </li>
+                    <li>
+                        <strong>Server-Log-Files (Hosting):</strong><br />
+                        Diese Webseite wird über Vercel gehostet. Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
+                        <ul style={{ listStyleType: 'circle', paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                            <li>Browsertyp und Browserversion</li>
+                            <li>Verwendetes Betriebssystem</li>
+                            <li>Referrer URL</li>
+                            <li>Hostname des zugreifenden Rechners</li>
+                            <li>Uhrzeit der Serveranfrage</li>
+                            <li>IP-Adresse</li>
+                        </ul>
+                        Diese Daten sind nicht bestimmten Personen zuordbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am fehlerfreien Betrieb der Website).
+                    </li>
                 </ul>
 
-                <h2 style={h2Style}>2. Hosting</h2>
-                <h3 style={h3Style}>Hosting mit Vercel</h3>
+                <h2 style={h2Style}>2. Cookies</h2>
+                <p>
+                    Diese Webseite verwendet aktuell keine Cookies, die eine Einwilligung erfordern (kein Tracking, kein Marketing).
+                    Sollten technisch notwendige Cookies oder Speichertechnologien (z. B. Local Storage für Ihre Eingaben oder Cookies durch den Hoster Vercel zur Sicherheitsprüfung) eingesetzt werden, erfolgt dies auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
+                </p>
+
+                <h2 style={h2Style}>3. Hosting mit Vercel</h2>
                 <p>
                     Wir hosten unsere Website bei Vercel Inc., 340 S Lemon Ave #4133 Walnut, CA 91789, USA.
                 </p>
                 <p style={{ marginTop: '0.5rem' }}>
-                    Wenn Sie unsere Website besuchen, erfasst Vercel verschiedene Logfiles inklusive Ihrer IP-Adressen. Vercel verwendet diese Daten, um die technische Infrastruktur bereitzustellen und die Sicherheit der Website zu gewährleisten.
-                    Details entnehmen Sie der Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>https://vercel.com/legal/privacy-policy</a>.
+                    Da Vercel ein US-Unternehmen ist, kann eine Datenübermittlung in die USA stattfinden. Wir nutzen Vercel ausschließlich für die Bereitstellung der technischen Infrastruktur.
+                    Weitere Details entnehmen Sie der Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)' }}>https://vercel.com/legal/privacy-policy</a>.
                 </p>
 
-                <h2 style={h2Style}>3. Allgemeine Hinweise und Pflichtinformationen</h2>
-                <h3 style={h3Style}>Datenschutz</h3>
-                <p>
-                    Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
-                </p>
-
-                <h3 style={h3Style}>Hinweis zur verantwortlichen Stelle</h3>
+                <h2 style={h2Style}>4. Hinweis zur verantwortlichen Stelle</h2>
                 <p>
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
                 </p>
@@ -81,9 +95,16 @@ export function Datenschutz() {
                     E-Mail: volh.shalk@gmail.com
                 </p>
 
-                <h3 style={h3Style}>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
-                <p>
-                    Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+                <h2 style={h2Style}>5. Ihre Rechte (Betroffenenrechte)</h2>
+                <p>Sie haben jederzeit das Recht:</p>
+                <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li>Auskunft über Ihre gespeicherten Daten zu erhalten.</li>
+                    <li>Die Berichtigung oder Löschung Ihrer Daten zu verlangen.</li>
+                    <li>Die Einschränkung der Verarbeitung zu fordern.</li>
+                    <li>Widerspruch gegen die Verarbeitung einzulegen.</li>
+                </ul>
+                <p style={{ marginTop: '1rem' }}>
+                    Bitte wenden Sie sich hierzu an die im Impressum angegebene E-Mail-Adresse.
                 </p>
             </div>
 
