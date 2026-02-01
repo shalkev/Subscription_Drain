@@ -46,7 +46,7 @@ export function CookieBanner() {
                         <div style={{ textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-main)' }}>
                             <p>
                                 <strong>Einstellung zu Cookies</strong> <br />
-                                Wir nutzen essenzielle Speichertechnologien, um die Funktionalität dieser Website zu gewährleisten (z.B. deine Eingaben im Rechner). Es werden keine Tracking-Daten an Dritte weitergegeben. Weitere Informationen finden Sie in unserer <Link to="/datenschutz" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Datenschutzerklärung</Link>.
+                                Wir nutzen essenzielle Speichertechnologien, um die Funktionalität dieser Website zu gewährleisten (z.B. deine Eingaben im Rechner). Es werden keine Tracking-Daten an Dritte weitergegeben. Weitere Informationen finden Sie in unserer <Link to="/datenschutz" className="footer-link" style={{ fontWeight: '600' }}>Datenschutzerklärung</Link>.
                             </p>
                         </div>
                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>

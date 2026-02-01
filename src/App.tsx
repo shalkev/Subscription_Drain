@@ -170,8 +170,8 @@ function Layout() {
         </div>
         <p>© 2026 Subscription Drain Kalkulator | Made with 💔 für bessere Finanzen</p>
         <div style={{ fontSize: '0.8rem', opacity: 0.7, display: 'flex', gap: '16px' }}>
-          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
-          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
+          <Link to="/impressum" className="footer-link">Impressum</Link>
+          <Link to="/datenschutz" className="footer-link">Datenschutz</Link>
         </div>
       </footer>
       <CookieBanner />

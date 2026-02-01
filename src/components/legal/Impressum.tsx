@@ -98,7 +98,7 @@ export function Impressum() {
             </div>
 
             <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--border-color)', textAlign: 'center' }}>
-                <Link to="/" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <Link to="/" className="footer-link" style={{ fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     ← Zurück zum Rechner
                 </Link>
             </div>
