@@ -85,12 +85,12 @@ function FloatingBackground() {
             style={{
               display: 'inline-block',
               transition: 'none',
-              opacity: p.isBurning ? 1 : 0.35,
-              textShadow: p.isBurning ? 'none' : '0 0 20px rgba(239, 68, 68, 0.4)',
-              filter: p.isBurning ? 'none' : 'grayscale(0.3) contrast(0.8)'
+              color: p.isBurning ? 'transparent' : '#FFD700',
+              opacity: p.isBurning ? 1 : 0.4,
+              textShadow: p.isBurning ? 'none' : '0 0 20px rgba(255, 215, 0, 0.6)',
             }}
           >
-            🔥
+            {p.isBurning ? '🔥' : '€'}
           </span>
         </div>
       ))}
