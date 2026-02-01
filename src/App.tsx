@@ -11,6 +11,7 @@ import { ProgressBar } from './components/ProgressBar';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Impressum } from './components/legal/Impressum';
 import { Datenschutz } from './components/legal/Datenschutz';
+import { CookieBanner } from './components/CookieBanner';
 import './App.css';
 
 function FloatingBackground() {
@@ -167,6 +168,7 @@ function Layout() {
           <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
         </div>
       </footer>
+      <CookieBanner />
     </div>
   );
 }
