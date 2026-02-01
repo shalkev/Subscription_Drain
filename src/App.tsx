@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { CalculatorProvider, useCalculator } from './context/CalculatorContext';
 import { SubscriptionProvider } from './context/SubscriptionContext';
 import { LandingHero } from './components/LandingHero';
@@ -8,6 +9,8 @@ import { InvestmentParameters } from './components/steps/InvestmentParameters';
 import { ResultDashboard } from './components/results/ResultDashboard';
 import { ProgressBar } from './components/ProgressBar';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Impressum } from './components/legal/Impressum';
+import { Datenschutz } from './components/legal/Datenschutz';
 import './App.css';
 
 function FloatingBackground() {
@@ -38,12 +41,7 @@ function FloatingBackground() {
             ...p,
             isBurning: false,
             left: Math.random() * 100,
-            delay: 0, // Reset delay to start fresh
-            // Reset position effectively by keyframe reset or just force re-render?
-            // The keyframes loop. Resetting is tricky without removing DOM node.
-            // Let's just reset burning state. It will pop back in.
-            // Ideally we'd reset the animation but that needs key change.
-            // For this simple effect, just un-burning is fine, it will reappear.
+            delay: 0,
           };
         }
         return p;
@@ -58,7 +56,7 @@ function FloatingBackground() {
       left: 0,
       width: '100%',
       height: '100%',
-      pointerEvents: 'none', // Allow clicks to pass through container
+      pointerEvents: 'none',
       zIndex: 0,
       overflow: 'hidden'
     }}>
@@ -72,14 +70,14 @@ function FloatingBackground() {
             position: 'absolute',
             left: `${p.left}%`,
             fontSize: `${p.size}rem`,
-            opacity: p.isBurning ? 0 : 0.7, // 70% opacity as requested
-            color: p.isBurning ? '#ef4444' : '#FFD700', // Intense Gold
-            textShadow: p.isBurning ? '0 0 20px #ef4444' : '0 0 20px rgba(255, 215, 0, 0.8)', // Strong Glow
+            opacity: p.isBurning ? 0 : 0.7,
+            color: p.isBurning ? '#ef4444' : '#FFD700',
+            textShadow: p.isBurning ? '0 0 20px #ef4444' : '0 0 20px rgba(255, 215, 0, 0.8)',
             animation: p.isBurning ? 'none' : `floatUp ${p.duration}s linear infinite`,
             animationDelay: `-${p.delay}s`,
             bottom: '-20%',
-            filter: p.isBurning ? 'blur(0px)' : 'none', // No blur for normal state
-            pointerEvents: 'auto', // Catch clicks on the money
+            filter: p.isBurning ? 'blur(0px)' : 'none',
+            pointerEvents: 'auto',
             cursor: 'crosshair',
             transform: p.isBurning ? 'scale(1.5)' : 'scale(1)',
             transition: 'all 0.3s ease-out',
@@ -93,7 +91,7 @@ function FloatingBackground() {
   );
 }
 
-function Calculator() {
+function Home() {
   const { currentStep } = useCalculator();
 
   const renderStep = () => {
@@ -114,35 +112,60 @@ function Calculator() {
   };
 
   return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentStep}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.3 }}
+        style={{ width: '100%' }}
+      >
+        {renderStep()}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function Layout() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
+  return (
     <div className="app-container">
       <FloatingBackground />
 
       <header className="app-header" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="logo" onClick={() => window.location.reload()} style={{ cursor: 'pointer' }}>
-          💸 Subscription Drain
-        </div>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="logo" style={{ cursor: 'pointer' }}>
+            💸 Subscription Drain
+          </div>
+        </Link>
       </header>
 
-      <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '900px' }}>
-        <ProgressBar totalSteps={4} />
-      </div>
+      {isHome && (
+        <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '900px' }}>
+          <ProgressBar totalSteps={4} />
+        </div>
+      )}
 
-      <main className="app-main" style={{ position: 'relative', zIndex: 1 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {renderStep()}
-          </motion.div>
-        </AnimatePresence>
+      <main className="app-main" style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
+        </Routes>
       </main>
 
-      <footer className="app-footer" style={{ position: 'relative', zIndex: 1 }}>
+      <footer className="app-footer" style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', paddingBottom: '2rem' }}>
+        <div style={{ maxWidth: '800px', margin: '0 1rem', fontSize: '0.75rem', opacity: 0.6, textAlign: 'center', lineHeight: '1.4' }}>
+          <strong>Risikohinweis:</strong> Alle Berechnungen dienen nur der Information und stellen keine Anlageberatung oder Aufforderung zum Kauf dar. Die Ergebnisse sind Prognosen basierend auf historischen Daten und keine Garantie für die Zukunft.
+        </div>
         <p>© 2026 Subscription Drain Kalkulator | Made with 💔 für bessere Finanzen</p>
+        <div style={{ fontSize: '0.8rem', opacity: 0.7, display: 'flex', gap: '16px' }}>
+          <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
+          <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
+        </div>
       </footer>
     </div>
   );
@@ -150,11 +173,13 @@ function Calculator() {
 
 function App() {
   return (
-    <SubscriptionProvider>
-      <CalculatorProvider>
-        <Calculator />
-      </CalculatorProvider>
-    </SubscriptionProvider>
+    <Router>
+      <SubscriptionProvider>
+        <CalculatorProvider>
+          <Layout />
+        </CalculatorProvider>
+      </SubscriptionProvider>
+    </Router>
   );
 }
 
