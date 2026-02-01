@@ -756,32 +756,58 @@ export function ResultDashboard() {
                         alignItems: 'center'
                     }}
                 >
-                    {/* Animated Robot Background - Subtle and Centered */}
+                    {/* AI Assistant Badge - Top Right */}
                     <motion.div
                         animate={{
-                            scale: [1, 1.05, 1],
-                            opacity: isThinking ? [0.1, 0.2, 0.1] : 0.15,
+                            y: [0, -5, 0],
+                            boxShadow: isThinking
+                                ? ['0 0 20px rgba(59, 130, 246, 0.4)', '0 0 40px rgba(59, 130, 246, 0.6)', '0 0 20px rgba(59, 130, 246, 0.4)']
+                                : '0 0 20px rgba(59, 130, 246, 0.2)'
                         }}
                         transition={{
-                            duration: 10,
+                            duration: 4,
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
                         style={{
                             position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            background: 'url("/ai-robot.png") no-repeat center center',
-                            backgroundSize: 'cover',
-                            pointerEvents: 'none',
-                            zIndex: 0,
-                            filter: 'blur(2px) brightness(0.7)',
-                            WebkitMaskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)',
-                            maskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)'
+                            top: '20px',
+                            right: '20px',
+                            width: '80px',
+                            height: '80px',
+                            background: 'rgba(59, 130, 246, 0.1)',
+                            borderRadius: '20px',
+                            border: '1px solid rgba(59, 130, 246, 0.3)',
+                            padding: '10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 10,
+                            backdropFilter: 'blur(10px)'
                         }}
-                    />
+                    >
+                        <img
+                            src="/ai-robot.png"
+                            alt="AI Assistant"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain'
+                            }}
+                        />
+                        {/* Status Indicator */}
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '8px',
+                            right: '8px',
+                            width: '12px',
+                            height: '12px',
+                            background: isThinking ? '#3b82f6' : '#10b981',
+                            borderRadius: '50%',
+                            border: '2px solid #05080f',
+                            boxShadow: isThinking ? '0 0 10px #3b82f6' : '0 0 10px #10b981'
+                        }} />
+                    </motion.div>
                     {/* Decorative Blur for Focus */}
                     <div style={{
                         position: 'absolute',

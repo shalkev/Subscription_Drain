@@ -2,11 +2,13 @@ export default function middleware(request: Request) {
     const url = new URL(request.url);
     const userAgent = request.headers.get('user-agent') || '';
 
-    // Erlaube Social Media Bots den Zugriff für Link-Vorschauen
-    const isBot = /bot|facebookexternalhit|whatsapp|telegram|twitter|slack|linkedin|discord|googlebot|bingbot/i.test(userAgent);
+    // Extrem breite Bot-Erkennung für Link-Vorschauen (WhatsApp, FB, etc.)
+    const isBot = /bot|facebookexternalhit|whatsapp|telegram|twitter|slack|linkedin|discord|googlebot|bingbot|applebot/i.test(userAgent);
 
-    // Erlaube direkten Zugriff auf das Vorschaubild (auch mit Query-Parametern)
-    const isOgImage = url.pathname === '/og-preview.png' || url.pathname.endsWith('og-preview.png');
+    // Erlaube direkten Zugriff auf das Vorschaubild (auch mit Query-Parametern/Versionierung)
+    const isOgImage = url.pathname === '/og-preview.png' ||
+        url.pathname.includes('og-preview.png') ||
+        url.pathname === '/vite.svg';
 
     if (isBot || isOgImage) {
         return new Response(null, {
