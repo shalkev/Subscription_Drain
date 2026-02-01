@@ -444,7 +444,7 @@ export function ResultDashboard() {
                 </div>
 
                 <div className="result-card">
-                    <h3>Investitions-Potenzial (10 Jahre)</h3>
+                    <h3>Investitions-Potenzial</h3>
                     <div style={{ height: '300px' }}>
                         <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={lineData}>
@@ -464,7 +464,7 @@ export function ResultDashboard() {
                     </div>
                     <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
                         <p style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: '#10b981', textShadow: '0 0 20px rgba(16, 185, 129, 0.2)' }}>
-                            {formatCurrency(result.investmentProjections[1].amount)}
+                            {formatCurrency(result.investmentProjections[result.investmentProjections.length - 1].amount)}
                         </p>
                         <div style={{
                             display: 'flex',
@@ -476,16 +476,14 @@ export function ResultDashboard() {
                             border: '1px solid rgba(255,255,255,0.1)'
                         }}>
                             <span style={{ color: 'var(--text-secondary)' }}>
-                                {formatCurrency(result.wastedMonthly * 12 * 10)} Sparguthaben
+                                {formatCurrency(result.wastedMonthly * 12 * result.investmentProjections[result.investmentProjections.length - 1].years)} Sparguthaben
                             </span>
                             <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>
-                                + {formatCurrency(result.investmentProjections[1].amount - (result.wastedMonthly * 12 * 10))} Zinsgewinn*
+                                + {formatCurrency(result.investmentProjections[result.investmentProjections.length - 1].amount - (result.wastedMonthly * 12 * result.investmentProjections[result.investmentProjections.length - 1].years))} Zinsgewinn
                             </span>
                         </div>
                     </div>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '1rem', fontStyle: 'italic' }}>
-                        *Berechnet mit einer durchschnittlichen jährlichen Rendite von 7% über 10 Jahre.
-                    </p>
+
                 </div>
             </div>
 
