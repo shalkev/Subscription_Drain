@@ -739,6 +739,7 @@ export function ResultDashboard() {
                 >
                     {/* Animated Robot Background - Centered on Right */}
                     <motion.div
+                        data-robot-bg="true"
                         animate={{
                             y: [0, -10, 0],
                             scale: isThinking ? [1, 1.02, 1] : [1, 1.01, 1],
@@ -775,9 +776,8 @@ export function ResultDashboard() {
                         pointerEvents: 'none'
                     }} />
 
-                    {/* Chat Content Wrapper - Narrower to avoid overlap */}
-                    <div style={{
-                        maxWidth: '55%',
+                    {/* Chat Content Wrapper - Responsive */}
+                    <div className="chat-content-wrapper" style={{
                         position: 'relative',
                         zIndex: 2,
                         display: 'flex',
