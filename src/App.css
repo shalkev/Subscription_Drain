@@ -686,6 +686,10 @@ input:focus {
   animation: burnAscend 0.9s ease-out forwards;
 }
 
+.shock-fire {
+  filter: drop-shadow(0 0 15px rgba(255, 77, 0, 0.4));
+}
+
 @keyframes floatUp {
   0% {
     transform: translateY(0) rotate(0deg);

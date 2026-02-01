@@ -6,6 +6,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis
 import html2canvas from 'html2canvas';
 import { Share2, RotateCcw, XCircle, TrendingUp, ExternalLink, Instagram, Facebook, MessageCircle, Twitter, Camera } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { FireIcon } from '../icons/FireIcon';
 
 export function ResultDashboard() {
     const { result, reset, investmentRate } = useCalculator();
@@ -271,11 +272,7 @@ export function ResultDashboard() {
                     gap: '0.6rem',
                     fontWeight: '500'
                 }}>
-                    <motion.span
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 1.2, repeat: Infinity }}
-                        style={{ filter: 'drop-shadow(0 0 15px rgba(239, 68, 68, 0.6))', display: 'inline-block' }}
-                    >🔥</motion.span>
+                    <FireIcon size={32} className="shock-fire" />
                     Dein jährlicher Drain
                 </h2>
 

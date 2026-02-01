@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Impressum } from './components/legal/Impressum';
 import { Datenschutz } from './components/legal/Datenschutz';
 import { CookieBanner } from './components/CookieBanner';
+import { FireIcon } from './components/icons/FireIcon';
 import './App.css';
 
 function FloatingBackground() {
@@ -90,7 +91,11 @@ function FloatingBackground() {
               textShadow: p.isBurning ? 'none' : '0 0 20px rgba(255, 215, 0, 0.6)',
             }}
           >
-            {p.isBurning ? '🔥' : '€'}
+            {p.isBurning ? (
+              <FireIcon size={p.size * 16} />
+            ) : (
+              '€'
+            )}
           </span>
         </div>
       ))}
