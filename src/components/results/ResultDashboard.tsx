@@ -274,8 +274,8 @@ export function ResultDashboard() {
                     <motion.span
                         animate={{ scale: [1, 1.3, 1] }}
                         transition={{ duration: 1.2, repeat: Infinity }}
-                        style={{ filter: 'drop-shadow(0 0 10px rgba(220, 38, 38, 0.5))' }}
-                    >💔</motion.span>
+                        style={{ filter: 'drop-shadow(0 0 15px rgba(239, 68, 68, 0.6))', display: 'inline-block' }}
+                    >🔥</motion.span>
                     Dein jährlicher Drain
                 </h2>
 
@@ -659,6 +659,6 @@ export function ResultDashboard() {
                     <RotateCcw size={18} /> Neu berechnen
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
